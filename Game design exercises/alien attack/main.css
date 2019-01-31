@@ -1,0 +1,121 @@
+#stage
+{
+    width: 300px;
+    height: 300px;
+    position: relative;
+}
+
+#background
+{
+    width: 300px;
+    height: 300px;
+    position:absolute;
+    top: 0;
+    left: 0;
+    background-image: url(space-bg.png);
+    background-size: cover;
+}
+
+#cannon
+{
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 270px;
+    left: 142px;
+    background: url(ship.png) left center;
+}
+
+#alien
+{
+    width: 23px;
+    height: 18px;
+    position: absolute;
+    top: 0px;
+    left: 134px;
+    background: url(alien.png) left center;
+}
+
+#missile
+{
+    width: 16px;
+    height: 10px;
+    position: absolute;
+    top: 0px;
+    left:134px;
+    background: url(shot-anim.png) left center;
+    
+}
+
+#explosion {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url(explosion.png) left center;
+    display: hidden;
+}
+
+/*animation*/
+#alien {
+    background-size: 92px 18px;
+    animation-name: squirm;
+    animation-duration: 1s;
+    animation-timing-function: steps(4);
+    animation-iteration-count: infinite;
+}
+
+#cannon {
+    -webkit-transition: left 0s ease-out 0s;
+}
+
+#missile {
+    background-size: 32px 10px;
+    animation-name: flame;
+    animation-duration: 0.25s;
+    animation-timing-function: steps(2);
+    animation-iteration-count: infinite;
+}
+
+#explosion {
+    background-size: 224px 32px;
+    animation-name: explode;
+    animation-duration: 2s;
+    animation-timing-function: steps(6);
+    animation-iteration-count: 1;
+    display: none;
+}
+
+@keyframes squirm {
+    0%{background-position: 0px}
+    24.99%{background-position: 0px}
+    25%{background-position: -23px}
+    49.99%{background-position: -23px}
+    50%{background-position: -46px}
+    74.99%{background-position: -46px}
+    75%{background-position: -69px}
+    100%{background-position: -69px}
+}
+
+@keyframes flame {
+    0%{background-position: 0px}
+    49.99%{background-position: 0px}
+    50%{background-position: 16px}
+    100%{background-position: 16px}
+}
+
+@keyframes explode {
+    0%{background-position: 0px}
+    16.99%{background-position: 0px}
+    17%{background-position: -32px}
+    32.99%{background-position: -32px}
+    33%{background-position: -64px}
+    48.99%{background-position: -64px}
+    49%{background-position: -96px}
+    65.99%{background-position: -96px}
+    66%{background-position: -128px}
+    72.99%{background-position: -128px}
+    73%{background-position: -160px}
+    100%{background-position: -160px}
+}

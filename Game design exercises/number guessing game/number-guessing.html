@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+  <html>
+   <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="stylesheet" type="text/css" href="main.css">
+
+        <title>Number Guessing Game</title>
+   </head>
+   
+   <body>
+        <div id="gameBoard">
+            <p id="instructions">I'm thinking of a number between 0 and 99.</p>
+            <input id="userInput" placeholder="Make a guess!" autofocus>
+            <button id="submit">Submit Guess</button>
+        </div>
+        
+        <script>
+        (function () {
+            var secretNumber = Math.floor(Math.random() * 100)
+                //console.log(secretNumber);
+            var numberGuess = 0;
+            var guessesRemaining = 10;
+            var guessesMade = 0;
+            var gameState = "";
+            var gameWon = false;
+            
+            var input = document.querySelector("#userInput");
+            var button = document.querySelector("#submit");
+            button.addEventListener("click", clickHandler, false);
+            window.addEventListener("keydown", keydownHandler, false);
+            
+            function keydownHandler(event)
+            {
+                if(event.keyCode == 13)
+                    {
+                        validateInput();
+                    }
+            }
+            
+            function clickHandler()
+            {
+                validateInput();
+            }
+            
+            function validateInput()
+            {
+                numberGuess = parseInt(input.value);
+                if (isNaN(numberGuess))
+                    {
+                        instructions.innerHTML = "Please enter a number.";
+                    }
+                else
+                {
+                    playGame();
+                }
+            }
+            
+            function playGame()
+            {
+                guessesRemaining -= 1;
+                guessesMade += 1;
+                gameState = "Guess: " + guessesMade + ", Remaining: " + guessesRemaining;
+                numberGuess = input.value;
+                console.log(numberGuess);
+                
+                //determine range of guess
+                if (numberGuess < 0 || numberGuess > 99)
+                    instructions.innerHTML = "Your guess is out of range! " + gameState;
+                else if (numberGuess > secretNumber)
+                    instructions.innerHTML = "Your guess is too high! " + gameState;
+                else if (numberGuess < secretNumber)
+                    instructions.innerHTML = "Your guess is too low! " + gameState;
+                
+                //check for the end conditions
+                if (guessesRemaining < 1)
+                    endGame();
+                else if (numberGuess == secretNumber)
+                    {
+                        gameWon = true;
+                        endGame();
+                    }
+            }
+            
+            function endGame() 
+            {
+                if (gameWon == true)
+                    {
+                        instructions.innerHTML = "Yes, it's " + secretNumber + "!" + "<br>" + "It only took you " + guessesMade + " guesses.";
+                    }
+                else{
+                    instructions.innerHTML = "No more guesses left!" + "<br>" + "The number was: " + secretNumber+ ".";
+                }
+                
+                //disable UI
+                button.removeEventListener("click", clickHandler, false);
+                button.disabled = true;
+                window.removeEventListener("keydown", keydownHandler, false);
+                input.disabled = true;
+            }
+        }());
+        </script>
+    </body>
+</html>

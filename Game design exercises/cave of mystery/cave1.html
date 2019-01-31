@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Cave of Mystery</title>
+    </head>
+    <body>
+        <p id="output"></p>
+        <input id="input" type="text" placeholder="Enter your action...">
+        <button>enter</button>
+        
+        <script>
+            var map = [];
+            map[0] = "A moist cave opening. Water trickles down onto your face from stalactites as you peer into its yawning mouth. The opening is to the south."
+            map[1] = "An aquarium is in the wall of this chamber. Blue light emanates from behind its glass, illuminating the small orange fish with a fluorescent glow. There are openings to the east and south. "
+            map[2] = "A cozy study. Shelves of leather-bound books conceal the walls. The room is lit by a fireplace in the far wall, and an antique armchair faces it. A shriveled arm droops over the right arm, its petrified fingers clutching a red tome."
+            map[3] = "A tall, narrow tunnel. Glittering stones and minerals stand out in the rock wall, catching the light of your headlamp. To the north is the cave entrance. There is an opening to the south."
+            map[4] = "A high-ceilinged vault. The dome looks too perfect to be natural. There are openings to the north, east, and west."
+            map[5] = "A catwalk over an abyss. It reaches out from one stone pillar to another, its metal frame rattling in a breeze from below. There are openings to the west and south."
+            map[6] = "A chamber lit only by flaming braziers. A pedestal in the center sits empty. It looks as though a book belongs on its surface. There is an opening to the east."
+            map[7] = "An old man sits on a park bench, throwing birdseed onto the verdant grass around him. This idyllic scene strikes you as strange, as you haven't seen any pigeons in this cave for the man to feed. You also have not seen a park in a cave before. There are openings to the east and west."
+            map[8] = "A great shrieking comes from the honeycombed rock in this room. Hundreds of tiny bats flit to and fro, gnashing their teeth and batting their wings in your face. There are openings to the north and west."
+            
+            var blockedPathMessage = "You can't go that way.";
+            var playerLocation = 0;
+            var playerInput = "";
+            var gameMessage = "";
+            
+            var actionsIKnow = ["north", "east", "south", "west"];
+            var action = "";
+            
+            var output = document.querySelector("#output");
+            var input = document.querySelector("#input");
+            
+            var button = document.querySelector("button");
+            button.style.cursor = "pointer";
+            button.addEventListener("click", clickHandler, false);
+            
+            render();
+            function clickHandler()
+            {
+                playGame();
+            }
+            function playGame()
+            {
+                playerInput = input.value;
+                playerInput = playerInput.toLowerCase();
+                
+                gameMessage = "";
+                action = "";
+                for (i = 0; i < actionsIKnow.length; i++)
+                    {
+                        if(playerInput.indexOf(actionsIKnow[i]) !== -1)
+                            {
+                                action = actionsIKnow[i];
+                                console.log("player action: " + action);
+                                break;
+                            }
+                    }
+                switch(action)
+                    {
+                        case "north":
+                            if (playerLocation == 2 || 5 || 8) 
+                                gameMessage = blockedPathMessage;
+                            else
+                                playerLocation -= 3;
+                            break;
+                        case "east":
+                            if (playerLocation == 0 || 5 || 8)
+                                gameMessage = blockedPathMessage;
+                            else
+                                playerLocation += 1;
+                            break;
+                        case "south": 
+                            if (playerLocation == 2 || 3 || 4 || 6 || 7 || 8)
+                                gameMessage = blockedPathMessage;
+                            else
+                                playerLocation += 3;
+                            break;
+                        case "west":
+                            playerLocation -= 1;
+                            break;
+                            defaul:
+                            gameMessage = "I don't understand that.";
+                    }
+                render();
+            }
+            function render()
+            {
+                output.innerHTML = map[playerLocation];
+                output.innerHTML += "<br><em>" + gameMessage + "</em>";
+            }
+        </script>
+    </body>
+</html>

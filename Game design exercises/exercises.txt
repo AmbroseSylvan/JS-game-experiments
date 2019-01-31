@@ -1,0 +1,66 @@
+var output = document.querySelector("#output");
+output.innerHTML = "Hello World!";
+output.style.color = "red";
+output.style.fontSize = "18px";
+
+document.querySelectorAll("p");
+
+
+var p = document.createElement("p");
+p.innerHTML = "Hello World!";
+p.setAttribute("id", "welcome");
+p.setAtrribute("class", "splash");
+document.body.appendChild(p);
+
+p.parentNode.removeChild(p);
+
+
+
+
+//MAKING CLICKABLE BUTTON
+
+var button = document.querySelector("button");
+button.addEventListener("click", clickHandler, false);
+
+function clickHandler()
+{
+	console.log("Button clicked");
+	button.removeEventListener("click", clickHandler, false);
+}
+
+
+//TRY ADDING A SCORE
+
+window.addEventListener("keydown", keydownHandler, false);
+function keydownHandler(event)
+{
+	if(event.keyCode === 13)
+	{
+		console.log("Enter key pressed");
+	}
+}
+
+
+//ADDING TEXT
+<input></input>
+<button>..
+<p></p>
+
+var button = ..
+button.addEventListener("click"..
+button.style.cursor = "pointer";
+
+function clickHandler()
+{
+	var input = document.querySelector("#input");
+	var output = ..
+	output.innerHTML = input.value;
+}
+
+
+<script src="program.js"></script>
+
+
+
+//immediate function
+(function () {   } ());
